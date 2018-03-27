@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Lab4</title>
+        <meta charset="utf-8">
+        <link href="style.css" rel="stylesheet" type="text/css">
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script src="script.js"></script>
+    </head>
+    <body>
+        <div id="vue-calculator">
+            <div id="screenDiv">
+                <span id="screen">{{string}}</span>
+            </div>
+            <div id="inputs">
+                <div id="btnDiv">
+                    <div class="btnRow">
+                        <button class="btnStyle" v-on:click="addNrToString">7</button>
+                        <button class="btnStyle" v-on:click="addNrToString">8</button>
+                        <button class="btnStyle" v-on:click="addNrToString">9</button>
+                        <button class="btnStyle" v-on:click="multiplication">x</button>
+                    </div>
+                    <div class="btnRow">
+                        <button class="btnStyle" v-on:click="addNrToString">4</button>
+                        <button class="btnStyle" v-on:click="addNrToString">5</button>
+                        <button class="btnStyle" v-on:click="addNrToString">6</button>
+                        <button class="btnStyle" v-on:click="subtracting">-</button>
+                    </div>
+                    <div class="btnRow">
+                        <button class="btnStyle" v-on:click="addNrToString">1</button>
+                        <button class="btnStyle" v-on:click="addNrToString">2</button>
+                        <button class="btnStyle" v-on:click="addNrToString">3</button>
+                        <button class="btnStyle" v-on:click="adding">+</button>
+                    </div>
+                    <div class="btnRow">
+                        <button class="btnStyle" v-on:click="clear">c</button>
+                        <button class="btnStyle" v-on:click="addNrToString">0</button>
+                        <button class="btnStyle" v-on:click="division">/</button>
+                        <button class="btnStyle" v-on:click="equal">=</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
