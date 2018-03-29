@@ -14,23 +14,28 @@ body{
     margin: auto;
     margin-top: 20px;
     background-color: red;
+    border: solid black 5px;
+    border-radius: 5px;
 }
 
 #screenDiv{
     position: relative;
     width: 90%;
-    height: 20%;
+    height: 15%;
     margin: auto;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    border: solid black 5px;
     background-color: white;
 }
 
 #screen{
     position: absolute;
-    height: 50%;
-    top: 25%;
-    bottom: 25%;
+    height: 90%;
+    top: 5%;
+    bottom: 5%;
     right: 10px;
-    font-size: 3.5em;
+    font-size: 4.5em;
 }
 
 #inputs{
@@ -49,13 +54,14 @@ body{
 
 .btnRow{
     display: flex;
-    height: 25%;
+    height: 20%;
 }
 
 .btnStyle{
     flex: 1 1 auto;
     font-size: 2em;
     margin: 5px;
-    border-radius: 15px;
+    border-radius: 10px;
+    border: solid black 5px;
     background-color: whitesmoke;
 }
