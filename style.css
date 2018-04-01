@@ -4,7 +4,7 @@
 }
 
 body{
-    background-color: aqua;
+    background-color: #031533;
 }
 
 #vue-calculator{
@@ -13,8 +13,8 @@ body{
     height: 650px;
     margin: auto;
     margin-top: 20px;
-    background-color: red;
-    border: solid black 5px;
+    background-color: lightgrey;
+    border: solid lightgrey 3px;
     border-radius: 5px;
 }
 
@@ -25,7 +25,6 @@ body{
     margin: auto;
     margin-top: 10px;
     margin-bottom: 5px;
-    border: solid black 5px;
     background-color: white;
 }
 
@@ -43,7 +42,6 @@ body{
     width: 90%;
     height: 80%;
     margin: auto;
-    background-color: red;
 }
 
 #btnDiv{
@@ -59,9 +57,10 @@ body{
 
 .btnStyle{
     flex: 1 1 auto;
-    font-size: 2em;
+    width: 25%;
+    font-size: 1.5em;
     margin: 5px;
-    border-radius: 10px;
-    border: solid black 5px;
-    background-color: whitesmoke;
+    border: solid grey 1px;
+    background-color: grey;
+    color: white;
 }

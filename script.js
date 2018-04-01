@@ -55,6 +55,12 @@ window.addEventListener('load', () => {
                 this.string = "";
                 this.operation = "/";
             },
+            sqrt: function(event) {
+                this.string = Math.sqrt(this.string);
+            },
+            pow: function(event) {
+                this.string = Math.pow(this.string, 2);
+            },
             equal: function(event) {
                 this.current = parseFloat(this.string);
                 this.string = "";
@@ -71,9 +77,10 @@ window.addEventListener('load', () => {
                     break;
                     case "/":
                         this.string = this.previous / this.current;
+                        console.log(this.string = (this.previous / this.current).toFixed(10));
                     break;
                 }
             }
-        }
-    });
-});
+        } // Methods
+    }); // Vue
+}); // Load Function

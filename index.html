@@ -15,8 +15,9 @@
             <div id="inputs">
                 <div id="btnDiv">
                     <div class="btnRow">
-                        <button class="btnStyle" v-on:click="clear">c</button>
                         <button class="btnStyle" v-on:click="backspace">⌫</button>
+                        <button class="btnStyle" v-on:click="pow">x²</button>
+                        <button class="btnStyle" v-on:click="sqrt">√</button>
                         <button class="btnStyle" v-on:click="division">/</button>
                     </div>
                     <div class="btnRow">
@@ -37,9 +38,10 @@
                         <button class="btnStyle" v-on:click="addNrToString">3</button>
                         <button class="btnStyle" v-on:click="adding">+</button>
                     </div>
-                    <div class="btnRow">
-                        <button class="btnStyle" v-on:click="addDecimalToString">.</button>
+                    <div class="btnRow" id = "bottom">
                         <button class="btnStyle" v-on:click="addNrToString">0</button>
+                        <button class="btnStyle" v-on:click="addDecimalToString">.</button>
+                        <button class="btnStyle" v-on:click="clear">c</button>
                         <button class="btnStyle" v-on:click="equal">=</button>
                     </div>
                 </div>
