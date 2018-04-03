@@ -1,10 +1,11 @@
 *{
     margin: 0;
     padding: 0;
+    font-family: 'IBM Plex Serif', serif;
 }
 
 body{
-    background-color: #031533;
+    background-color: lightcoral;
 }
 
 #vue-calculator{
@@ -12,14 +13,14 @@ body{
     width: 500px;
     height: 650px;
     margin: auto;
-    margin-top: 20px;
+    margin-top: 50px;
     background-color: lightgrey;
     border: solid lightgrey 3px;
 }
 
 #screenDiv{
     position: relative;
-    width: 90%;
+    width: 89%;
     height: 15%;
     margin: auto;
     margin-top: 10px;
@@ -30,9 +31,9 @@ body{
 #screen{
     position: absolute;
     height: 90%;
-    top: 5%;
+    top: 0;
+    right: 5px;
     bottom: 5%;
-    right: 10px;
     font-size: 4.5em;
 }
 
@@ -58,8 +59,12 @@ body{
     flex: 1 1 auto;
     width: 25%;
     font-size: 1.5em;
-    margin: 5px;
-    border: solid grey 1px;
+    margin: 3px;
     background-color: grey;
     color: white;
+}
+
+.btnStyle:hover{
+    transition: .5s;
+    background-color: lightcoral;
 }
