@@ -1,7 +1,7 @@
 *{
     margin: 0;
     padding: 0;
-    font-family: 'IBM Plex Serif', serif;
+    font-family: 'Roboto Mono', monospace;
 }
 
 body{
@@ -31,10 +31,10 @@ body{
 #screen{
     position: absolute;
     height: 90%;
-    top: 0;
-    right: 5px;
+    top: 15px;
+    right: 10px;
     bottom: 5%;
-    font-size: 4.5em;
+    font-size: 4em;
 }
 
 #inputs{

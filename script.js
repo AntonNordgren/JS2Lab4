@@ -1,8 +1,4 @@
 
-let x = function () {
-    console.log("Hej");
-}
-
 window.addEventListener('load', () => {
     let vm = new Vue({
         el: '#vue-calculator',
@@ -52,34 +48,59 @@ window.addEventListener('load', () => {
                     this.string = this.string.slice(0, this.string.length - 1);
                 }
             },
+            renderNumber: function (theNumber) {
+                let nrOfDigits = 10;
+                let nrOfDecimal = undefined;
+                function countWholeNumbers(theNumber) {
+                    let str = theNumber.toString();
+                    for (let i = 0; i < str.length; i++) {
+                        if (str[i] === '.') {
+                            nrOfDecimal = nrOfDigits - i;
+                            return i;
+                        }
+                    }
+                }
+                if(theNumber > 9999999999) {
+                    return "Overflow";
+                }
+                else if (theNumber.toString().length > 10) {
+                    countWholeNumbers(theNumber);
+                    return theNumber.toFixed(nrOfDecimal);
+                }
+                else {
+                    return theNumber;
+                }
+            },
             adding: function (event) {
-                console.log(this.operation);
                 if (this.memory == undefined) {
                     this.memory = parseFloat(this.string);
                 }
                 else {
                     if (this.equalClicked == true) {
-                        this.string = this.memory.toString();
+                        // this.string = this.renderNumber(this.memory);
+
+                        this.string = this.string = this.renderNumber(this.memory);
+
                         this.equalClicked = false;
                     }
                     else {
-                        if(this.operation != '+') {
-                            if(this.operation == '-') {
+                        if (this.operation != '+') {
+                            if (this.operation == '-') {
                                 this.memory -= parseFloat(this.string);
-                                this.string = this.memory.toString();
+                                this.string = this.renderNumber(this.memory);
                             }
-                            if(this.operation == '*') {
+                            if (this.operation == '*') {
                                 this.memory *= parseFloat(this.string);
-                                this.string = this.memory.toString();
+                                 this.string = this.renderNumber(this.memory);
                             }
-                            if(this.operation == '/') {
+                            if (this.operation == '/') {
                                 this.memory /= parseFloat(this.string);
-                                this.string = this.memory.toString();
+                                 this.string = this.renderNumber(this.memory);
                             }
                         }
                         else {
                             this.memory += parseFloat(this.string);
-                            this.string = this.memory.toString();
+                             this.string = this.renderNumber(this.memory);
                         }
                     }
                 }
@@ -87,34 +108,33 @@ window.addEventListener('load', () => {
                 this.operation = '+';
             },
             subtracting: function (event) {
-                console.log(this.operation);
                 if (this.memory == undefined) {
                     this.memory = parseFloat(this.string);
                 }
                 else {
                     if (this.equalClicked == true) {
-                        this.string = this.memory.toString();
+                         this.string = this.renderNumber(this.memory);
                         this.equalClicked = false;
                     }
                     else {
-                        if(this.operation != '-') {
-                            if(this.operation == '+') {
+                        if (this.operation != '-') {
+                            if (this.operation == '+') {
                                 this.memory += parseFloat(this.string);
-                                this.string = this.memory.toString();
+                                 this.string = this.renderNumber(this.memory);
                             }
-                            if(this.operation == '*') {
+                            if (this.operation == '*') {
                                 this.memory *= parseFloat(this.string);
-                                this.string = this.memory.toString();
+                                 this.string = this.renderNumber(this.memory);
                             }
-                            if(this.operation == '/') {
+                            if (this.operation == '/') {
 
                                 this.memory /= parseFloat(this.string);
-                                this.string = this.memory.toString();
+                                 this.string = this.renderNumber(this.memory);
                             }
                         }
                         else {
                             this.memory -= parseFloat(this.string);
-                            this.string = this.memory.toString();
+                             this.string = this.renderNumber(this.memory);
                         }
                     }
                 }
@@ -122,33 +142,32 @@ window.addEventListener('load', () => {
                 this.operation = '-';
             },
             multiplication: function (event) {
-                console.log(this.operation);
                 if (this.memory == undefined) {
                     this.memory = parseFloat(this.string);
                 }
                 else {
                     if (this.equalClicked == true) {
-                        this.string = this.memory.toString();
+                         this.string = this.renderNumber(this.memory);
                         this.equalClicked = false;
                     }
                     else {
-                        if(this.operation != '*') {
-                            if(this.operation == '+') {
+                        if (this.operation != '*') {
+                            if (this.operation == '+') {
                                 this.memory += parseFloat(this.string);
-                                this.string = this.memory.toString();
+                                 this.string = this.renderNumber(this.memory);
                             }
-                            if(this.operation == '-') {
+                            if (this.operation == '-') {
                                 this.memory -= parseFloat(this.string);
-                                this.string = this.memory.toString();
+                                 this.string = this.renderNumber(this.memory);
                             }
-                            if(this.operation == '/') {
+                            if (this.operation == '/') {
                                 this.memory /= parseFloat(this.string);
-                                this.string = this.memory.toString();
+                                 this.string = this.renderNumber(this.memory);
                             }
                         }
                         else {
                             this.memory *= parseFloat(this.string);
-                            this.string = this.memory.toString();
+                             this.string = this.renderNumber(this.memory);
                         }
                     }
                 }
@@ -162,30 +181,28 @@ window.addEventListener('load', () => {
                 }
                 else {
                     if (this.equalClicked == true) {
-                        console.log("Equal Clicked!");
-                        this.string = this.memory.toString();
+                         this.string = this.renderNumber(this.memory);
                         this.equalClicked = false;
                     }
                     else {
                         console.log("Added clicked!");
-                        if(this.operation != '/') {
-                            console.log('Other operation!');
-                            if(this.operation == '+') {
+                        if (this.operation != '/') {
+                            if (this.operation == '+') {
                                 this.memory += parseFloat(this.string);
-                                this.string = this.memory.toString();
+                                 this.string = this.renderNumber(this.memory);
                             }
-                            if(this.operation == '-') {
+                            if (this.operation == '-') {
                                 this.memory -= parseFloat(this.string);
-                                this.string = this.memory.toString();
+                                 this.string = this.renderNumber(this.memory);
                             }
-                            if(this.operation == '*') {
+                            if (this.operation == '*') {
                                 this.memory *= parseFloat(this.string);
-                                this.string = this.memory.toString();
+                                 this.string = this.renderNumber(this.memory);
                             }
                         }
                         else {
                             this.memory /= parseFloat(this.string);
-                            this.string = this.memory.toString();
+                             this.string = this.renderNumber(this.memory);
                         }
                     }
                 }
@@ -193,37 +210,34 @@ window.addEventListener('load', () => {
                 this.operation = '/';
             },
             sqrt: function (event) {
-                this.string = Math.sqrt(this.string);
+                //this.string = Math.sqrt(this.string);
+                this.string = this.renderNumber(Math.sqrt(this.string));                
             },
             pow: function (event) {
-                this.string = Math.pow(this.string, 2);
+                //this.string = Math.pow(this.string, 2);
+                this.string = this.renderNumber(Math.pow(this.string, 2));
             },
             equal: function (event) {
-                console.log("Operation: " + this.operation);
                 if (this.operation == undefined) {
                 }
                 if (this.operation == '+') {
                     this.memory += parseFloat(this.string);
-                    this.string = this.memory.toString();
-                    console.log("Memory: " + this.memory);
+                     this.string = this.renderNumber(this.memory);
                     this.readyToClear = true;
                 }
                 if (this.operation == '-') {
                     this.memory -= parseFloat(this.string);
-                    this.string = this.memory.toString();
-                    console.log("Memory: " + this.memory);
+                     this.string = this.renderNumber(this.memory);
                     this.readyToClear = true;
                 }
                 if (this.operation == '*') {
                     this.memory *= parseFloat(this.string);
-                    this.string = this.memory.toString();
-                    console.log("Memory: " + this.memory);
+                     this.string = this.renderNumber(this.memory);
                     this.readyToClear = true;
                 }
                 if (this.operation == '/') {
                     this.memory /= parseFloat(this.string);
-                    this.string = this.memory.toString();
-                    console.log("Memory: " + this.memory);
+                     this.string = this.renderNumber(this.memory);
                     this.readyToClear = true;
                 }
                 this.equalClicked = true;
