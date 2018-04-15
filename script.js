@@ -8,24 +8,26 @@ window.addEventListener('load', () => {
             operation: undefined,
             current: undefined,
             readyToClear: false,
-            equalClicked: false
+            equalClicked: false,
+            historyList: [],
+            historyString: "",
+            previousOperation: undefined
         },
         methods: {
-            clear: function (event) {
+            clear: function () {
                 this.string = "0";
                 this.memory = undefined;
                 this.current = undefined;
                 this.operation = undefined;
                 this.readyToClear = false;
                 this.equalClicked = false;
+                this.historyString = "";
             },
-            addNrToString: function (event) {
-
+            addNrToString: function () {
                 if (this.readyToClear) {
                     this.string = "";
                     this.readyToClear = false;
                 }
-
                 if (this.string.length != 10) {
                     if (this.string === "0") {
                         this.string = event.target.innerText;
@@ -60,7 +62,7 @@ window.addEventListener('load', () => {
                         }
                     }
                 }
-                if(theNumber > 9999999999) {
+                if (theNumber > 9999999999) {
                     return "Overflow";
                 }
                 else if (theNumber.toString().length > 10) {
@@ -72,176 +74,143 @@ window.addEventListener('load', () => {
                 }
             },
             adding: function (event) {
-                if (this.memory == undefined) {
-                    this.memory = parseFloat(this.string);
-                }
-                else {
-                    if (this.equalClicked == true) {
-                        // this.string = this.renderNumber(this.memory);
 
-                        this.string = this.string = this.renderNumber(this.memory);
-
-                        this.equalClicked = false;
+                if(this.string !== "Overflow") {
+                    this.previousOperation = "+";
+                    if (this.memory == undefined) {
+                        this.buildHistoryString(this.string);
+                        this.memory = parseFloat(this.string);
                     }
                     else {
-                        if (this.operation != '+') {
-                            if (this.operation == '-') {
-                                this.memory -= parseFloat(this.string);
-                                this.string = this.renderNumber(this.memory);
-                            }
-                            if (this.operation == '*') {
-                                this.memory *= parseFloat(this.string);
-                                 this.string = this.renderNumber(this.memory);
-                            }
-                            if (this.operation == '/') {
-                                this.memory /= parseFloat(this.string);
-                                 this.string = this.renderNumber(this.memory);
-                            }
-                        }
-                        else {
-                            this.memory += parseFloat(this.string);
-                             this.string = this.renderNumber(this.memory);
-                        }
+                        this.calc();
                     }
+                    this.readyToClear = true;
+                    this.operation = '+';
                 }
-                this.readyToClear = true;
-                this.operation = '+';
+
             },
             subtracting: function (event) {
-                if (this.memory == undefined) {
-                    this.memory = parseFloat(this.string);
-                }
-                else {
-                    if (this.equalClicked == true) {
-                         this.string = this.renderNumber(this.memory);
-                        this.equalClicked = false;
+                if(this.string !== "Overflow") {
+                    this.previousOperation = "-";
+                    if (this.memory == undefined) {
+                        this.buildHistoryString(this.string);
+                        this.memory = parseFloat(this.string);
                     }
                     else {
-                        if (this.operation != '-') {
-                            if (this.operation == '+') {
-                                this.memory += parseFloat(this.string);
-                                 this.string = this.renderNumber(this.memory);
-                            }
-                            if (this.operation == '*') {
-                                this.memory *= parseFloat(this.string);
-                                 this.string = this.renderNumber(this.memory);
-                            }
-                            if (this.operation == '/') {
-
-                                this.memory /= parseFloat(this.string);
-                                 this.string = this.renderNumber(this.memory);
-                            }
-                        }
-                        else {
-                            this.memory -= parseFloat(this.string);
-                             this.string = this.renderNumber(this.memory);
-                        }
+                        this.calc();
                     }
+                    this.readyToClear = true;
+                    this.operation = '-';
                 }
-                this.readyToClear = true;
-                this.operation = '-';
             },
             multiplication: function (event) {
-                if (this.memory == undefined) {
-                    this.memory = parseFloat(this.string);
-                }
-                else {
-                    if (this.equalClicked == true) {
-                         this.string = this.renderNumber(this.memory);
-                        this.equalClicked = false;
+                if(this.string !== "Overflow") {
+                    this.previousOperation = "*";
+                    if (this.memory == undefined) {
+                        this.buildHistoryString(this.string);
+                        this.memory = parseFloat(this.string);
                     }
                     else {
-                        if (this.operation != '*') {
-                            if (this.operation == '+') {
-                                this.memory += parseFloat(this.string);
-                                 this.string = this.renderNumber(this.memory);
-                            }
-                            if (this.operation == '-') {
-                                this.memory -= parseFloat(this.string);
-                                 this.string = this.renderNumber(this.memory);
-                            }
-                            if (this.operation == '/') {
-                                this.memory /= parseFloat(this.string);
-                                 this.string = this.renderNumber(this.memory);
-                            }
-                        }
-                        else {
-                            this.memory *= parseFloat(this.string);
-                             this.string = this.renderNumber(this.memory);
-                        }
+                        this.calc();
                     }
+                    this.readyToClear = true;
+                    this.operation = '*';
                 }
-                this.readyToClear = true;
-                this.operation = '*';
             },
             division: function (event) {
-                console.log(this.operation);
-                if (this.memory == undefined) {
-                    this.memory = parseFloat(this.string);
-                }
-                else {
-                    if (this.equalClicked == true) {
-                         this.string = this.renderNumber(this.memory);
-                        this.equalClicked = false;
+                if(this.string !== "Overflow") {
+                    this.previousOperation = "/";
+                    if (this.memory == undefined) {
+                        this.buildHistoryString(this.string);
+                        this.memory = parseFloat(this.string);
                     }
                     else {
-                        console.log("Added clicked!");
-                        if (this.operation != '/') {
-                            if (this.operation == '+') {
-                                this.memory += parseFloat(this.string);
-                                 this.string = this.renderNumber(this.memory);
-                            }
-                            if (this.operation == '-') {
-                                this.memory -= parseFloat(this.string);
-                                 this.string = this.renderNumber(this.memory);
-                            }
-                            if (this.operation == '*') {
-                                this.memory *= parseFloat(this.string);
-                                 this.string = this.renderNumber(this.memory);
-                            }
-                        }
-                        else {
-                            this.memory /= parseFloat(this.string);
-                             this.string = this.renderNumber(this.memory);
-                        }
+                        this.calc();
                     }
+                    this.readyToClear = true;
+                    this.operation = '/';
                 }
-                this.readyToClear = true;
-                this.operation = '/';
             },
             sqrt: function (event) {
-                //this.string = Math.sqrt(this.string);
-                this.string = this.renderNumber(Math.sqrt(this.string));                
+                if(this.string !== "Overflow" && this.string > 1) {
+                    this.string = this.renderNumber(Math.sqrt(this.string));
+                }
             },
             pow: function (event) {
-                //this.string = Math.pow(this.string, 2);
-                this.string = this.renderNumber(Math.pow(this.string, 2));
+                if(this.string !== "Overflow") {
+                    this.string = this.renderNumber(Math.pow(this.string, 2));
+                }
             },
             equal: function (event) {
-                if (this.operation == undefined) {
-                }
                 if (this.operation == '+') {
+                    this.buildHistoryString(" + ");
                     this.memory += parseFloat(this.string);
-                     this.string = this.renderNumber(this.memory);
+                    this.buildHistoryString(this.string + " = " + this.memory);
+                    this.string = this.renderNumber(this.memory);
                     this.readyToClear = true;
                 }
                 if (this.operation == '-') {
+                    this.buildHistoryString(" - ");
                     this.memory -= parseFloat(this.string);
-                     this.string = this.renderNumber(this.memory);
+                    this.buildHistoryString(this.string + " = " + this.memory);
+                    this.string = this.renderNumber(this.memory);
                     this.readyToClear = true;
                 }
                 if (this.operation == '*') {
+                    this.buildHistoryString(" * ");
                     this.memory *= parseFloat(this.string);
-                     this.string = this.renderNumber(this.memory);
+                    this.buildHistoryString(this.string + " = " + this.memory);
+                    this.string = this.renderNumber(this.memory);
                     this.readyToClear = true;
                 }
                 if (this.operation == '/') {
+                    this.buildHistoryString(" / ");
                     this.memory /= parseFloat(this.string);
-                     this.string = this.renderNumber(this.memory);
+                    this.buildHistoryString(this.string + " = " + this.memory);
+                    this.string = this.renderNumber(this.memory);
                     this.readyToClear = true;
                 }
                 this.equalClicked = true;
                 this.operation = undefined;
+                this.historyList.push(this.historyString);
+                this.historyString = "";
+                this.previousOperation = undefined;
+            },
+            calc: function () {
+                if (this.equalClicked == true) {
+                    this.string = this.renderNumber(this.memory);
+                    this.equalClicked = false;
+                    this.historyString = "";
+                    this.buildHistoryString(this.memory);
+                }
+                else {
+                    if (this.operation == '+') {
+                        this.buildHistoryString(" + " + this.string);
+                        this.memory += parseFloat(this.string);
+                        this.string = this.renderNumber(this.memory);
+                    }
+                    if (this.operation == '-') {
+                        this.buildHistoryString(" - " + this.string);
+                        this.memory -= parseFloat(this.string);
+                        this.string = this.renderNumber(this.memory);
+                    }
+                    if (this.operation == '*') {
+                        this.buildHistoryString(" * " + this.string);
+                        this.memory *= parseFloat(this.string);
+                        this.string = this.renderNumber(this.memory);
+                    }
+                    if (this.operation == '/') {
+                        this.buildHistoryString(" / " + this.string);
+                        this.memory /= parseFloat(this.string);
+                        this.string = this.renderNumber(this.memory);
+                    }
+                }
+            },
+            buildHistoryString : function(string) {
+                this.historyString += string;
+            },
+            clearHistory : function(string) {
+                this.historyList = [];
             }
         } // Methods
     }); // Vue
