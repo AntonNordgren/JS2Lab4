@@ -325,7 +325,7 @@ window.addEventListener('load', () => {
             },
             pushHistoryList: function () {
                 if (this.historyString !== "") {
-                    this.historyList.push(this.historyString);
+                    this.historyList.splice(0, 0, this.historyString);
                 }
             },
             clearHistory: function (string) {
