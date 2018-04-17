@@ -141,6 +141,7 @@ window.addEventListener('load', () => {
             },
             sqrt: function (event) {
                 if(this.string !== "Overflow" && this.string > 0) {
+                    /*
                     this.memory = this.string;
                     this.buildHistoryString("√(" + this.string + ") = ");
                     this.string = this.renderNumber(Math.sqrt(this.string));
@@ -149,10 +150,44 @@ window.addEventListener('load', () => {
                     this.operation = '√';
                     this.memory = parseFloat(this.string);
                     this.historyString = this.memory;
+                    */
+
+                   /*
+                   if(this.operation !== '√') {
+                       console.log("Ohter Operation");
+                       console.log("This memory: " + this.memory);
+                       this.buildHistoryString(" " + this.operation + " √(" + this.string + ") = ");
+                       //this.calc();
+                       //this.memory += parseFloat(this.string);
+                       this.buildHistoryString(this.string);
+                       console.log(this.string);
+                       //this.string = this.renderNumber(this.memory);
+                       console.log("This memory: " + this.memory);
+                   }
+                   let prevString = this.string;
+                   this.string = this.renderNumber(Math.sqrt(this.string));
+                   //this.buildHistoryString(this.string);
+                   this.operation = '√';
+                   */
+
+                   /*
+                   if(this.operation !== '√') {
+                       console.log(this.string);
+                       //this.buildHistoryString(" " + this.operation + " " + '√(' + this.string + ') ');
+                       this.string = this.renderNumber(Math.sqrt(this.string));
+                       //this.buildHistoryString(" " + this.operation + " " + '√');
+                   }
+                   */
+                if(this.equalClicked == true) {
+                    this.clear();
+                }
+                  this.string = this.renderNumber(Math.sqrt(this.string));
+                  //this.memory = parseFloat(this.string);
                 }
                 this.isNegativeString();
             },
             pow: function (event) {
+                /*
                 if(this.string !== "Overflow") {
                     this.string = this.renderNumber(Math.pow(this.string, 2));
                     this.memory = parseFloat(this.string);
@@ -169,16 +204,21 @@ window.addEventListener('load', () => {
                     this.operation = '^';
                 }
                 this.isNegativeString();
+                */
+               this.string = this.renderNumber(Math.pow(this.string, 2));
+               this.memory = parseFloat(this.string);
             },
             equal: function (event) {
                 if (this.operation == '+') {
 
+                    /*
                     this.buildHistoryString(" + ");
                     this.memory += parseFloat(this.string);
-                    this.buildHistoryString(this.string + " = " + this.memory);
+                    // Old Working
+                    //this.buildHistoryString(this.string + " = " + this.memory);
+                    this.buildHistoryString(" = " + this.memory);
                     this.string = this.renderNumber(this.memory);
                     this.readyToClear = true;
-
 
                     /*
                     this.buildHistoryString(" + ");
@@ -190,6 +230,11 @@ window.addEventListener('load', () => {
                     this.string = this.renderNumber(this.memory);
                     this.readyToClear = true;
                     */
+                   this.buildHistoryString(" + ");
+                   this.memory += parseFloat(this.string);
+                   this.buildHistoryString(this.string + " = " + this.memory);
+                   this.string = this.renderNumber(this.memory);
+                   this.readyToClear = true;
                 }
                 if (this.operation == '-') {
                     this.buildHistoryString(" - ");
@@ -212,6 +257,17 @@ window.addEventListener('load', () => {
                     this.string = this.renderNumber(this.memory);
                     this.readyToClear = true;
                 }
+                if (this.operation == '') {
+
+                }
+                if (this.operation == '√') {
+                    this.memory += parseFloat(this.string);
+                    // Old Working
+                    //this.buildHistoryString(this.string + " = " + this.memory);
+                    this.buildHistoryString(" = " + this.memory);
+                    this.string = this.renderNumber(this.memory);
+                    this.readyToClear = true;
+                }
                 this.equalClicked = true;
                 this.operation = undefined;
                 this.pushHistoryList(this.historyString);
@@ -231,6 +287,7 @@ window.addEventListener('load', () => {
                         this.buildHistoryString(" + " + this.string);
                         this.memory += parseFloat(this.string);
                         this.string = this.renderNumber(this.memory);
+                        console.log(this.string);
                     }
                     if (this.operation == '-') {
                         this.buildHistoryString(" - " + this.string);
@@ -251,6 +308,7 @@ window.addEventListener('load', () => {
                     if (this.operation = '^') {
                     }
                     if (this.operation = '√') {
+                        this.buildHistoryString(" = " + this.memory);
                     }
                     */
                 }
@@ -258,6 +316,7 @@ window.addEventListener('load', () => {
             },
             buildHistoryString : function(string) {
                 this.historyString += string;
+                console.log(this.historyString);
             },
             pushHistoryList : function() {
                 if(this.historyString !== "") {
