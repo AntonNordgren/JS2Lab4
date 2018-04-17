@@ -1,7 +1,8 @@
 *{
     margin: 0;
     padding: 0;
-    font-family: 'Roboto Mono', monospace;
+    outline: none;
+    font-family: 'Oxygen Mono', monospace;
 }
 
 body{
@@ -41,9 +42,8 @@ body{
 #screen{
     position: absolute;
     height: 90%;
-    top: 15px;
+    top: 10px;
     right: 10px;
-    bottom: 5%;
     font-size: 4em;
 }
 
@@ -103,9 +103,11 @@ body{
 
 #clearHistory{
     position: absolute;
-    top: 0;
+    width: 120px;
+    left: 90px;
+    right: 90px;
+    top: 1px;
     right: 10px;;
     background-color: grey;
     color: white;
-    padding: 2px;
 }
