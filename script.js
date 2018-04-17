@@ -12,7 +12,7 @@ window.addEventListener('load', () => {
             historyList: [],
             historyString: "",
             previousOperation: undefined,
-            showSqrtButton : true
+            showSqrtButton: true
         },
         methods: {
             clear: function () {
@@ -25,7 +25,7 @@ window.addEventListener('load', () => {
                 this.historyString = "";
             },
             addNrToString: function () {
-                if(this.equalClicked == true) {
+                if (this.equalClicked == true) {
                     this.clear();
                 }
                 if (this.readyToClear) {
@@ -43,7 +43,7 @@ window.addEventListener('load', () => {
             },
             addDecimalToString: function (event) {
                 if (!this.string.includes('.')) {
-                    if(this.equalClicked == true) {
+                    if (this.equalClicked == true) {
                         this.clear();
                     }
                     this.string += event.target.innerText;
@@ -84,7 +84,7 @@ window.addEventListener('load', () => {
                 this.isNegativeString();
             },
             adding: function (event) {
-                if(this.string !== "Overflow") {
+                if (this.string !== "Overflow") {
                     this.previousOperation = "+";
                     if (this.memory == undefined) {
                         this.buildHistoryString(this.string);
@@ -98,7 +98,7 @@ window.addEventListener('load', () => {
                 }
             },
             subtracting: function (event) {
-                if(this.string !== "Overflow") {
+                if (this.string !== "Overflow") {
                     this.previousOperation = "-";
                     if (this.memory == undefined) {
                         this.buildHistoryString(this.string);
@@ -112,7 +112,7 @@ window.addEventListener('load', () => {
                 }
             },
             multiplication: function (event) {
-                if(this.string !== "Overflow") {
+                if (this.string !== "Overflow") {
                     this.previousOperation = "*";
                     if (this.memory == undefined) {
                         this.buildHistoryString(this.string);
@@ -126,7 +126,7 @@ window.addEventListener('load', () => {
                 }
             },
             division: function (event) {
-                if(this.string !== "Overflow") {
+                if (this.string !== "Overflow") {
                     this.previousOperation = "/";
                     if (this.memory == undefined) {
                         this.buildHistoryString(this.string);
@@ -140,7 +140,7 @@ window.addEventListener('load', () => {
                 }
             },
             sqrt: function (event) {
-                if(this.string !== "Overflow" && this.string > 0) {
+                if (this.string !== "Overflow" && this.string > 0) {
                     /*
                     this.memory = this.string;
                     this.buildHistoryString("√(" + this.string + ") = ");
@@ -152,37 +152,38 @@ window.addEventListener('load', () => {
                     this.historyString = this.memory;
                     */
 
-                   /*
-                   if(this.operation !== '√') {
-                       console.log("Ohter Operation");
-                       console.log("This memory: " + this.memory);
-                       this.buildHistoryString(" " + this.operation + " √(" + this.string + ") = ");
-                       //this.calc();
-                       //this.memory += parseFloat(this.string);
-                       this.buildHistoryString(this.string);
-                       console.log(this.string);
-                       //this.string = this.renderNumber(this.memory);
-                       console.log("This memory: " + this.memory);
-                   }
-                   let prevString = this.string;
-                   this.string = this.renderNumber(Math.sqrt(this.string));
-                   //this.buildHistoryString(this.string);
-                   this.operation = '√';
-                   */
+                    /*
+                    if(this.operation !== '√') {
+                        console.log("Ohter Operation");
+                        console.log("This memory: " + this.memory);
+                        this.buildHistoryString(" " + this.operation + " √(" + this.string + ") = ");
+                        //this.calc();
+                        //this.memory += parseFloat(this.string);
+                        this.buildHistoryString(this.string);
+                        console.log(this.string);
+                        //this.string = this.renderNumber(this.memory);
+                        console.log("This memory: " + this.memory);
+                    }
+                    let prevString = this.string;
+                    this.string = this.renderNumber(Math.sqrt(this.string));
+                    //this.buildHistoryString(this.string);
+                    this.operation = '√';
+                    */
 
-                   /*
-                   if(this.operation !== '√') {
-                       console.log(this.string);
-                       //this.buildHistoryString(" " + this.operation + " " + '√(' + this.string + ') ');
-                       this.string = this.renderNumber(Math.sqrt(this.string));
-                       //this.buildHistoryString(" " + this.operation + " " + '√');
-                   }
-                   */
-                if(this.equalClicked == true) {
-                    this.clear();
-                }
-                  this.string = this.renderNumber(Math.sqrt(this.string));
-                  //this.memory = parseFloat(this.string);
+                    /*
+                    if(this.operation !== '√') {
+                        console.log(this.string);
+                        //this.buildHistoryString(" " + this.operation + " " + '√(' + this.string + ') ');
+                        this.string = this.renderNumber(Math.sqrt(this.string));
+                        //this.buildHistoryString(" " + this.operation + " " + '√');
+                    }
+                    */
+                   let temp = this.renderNumber(Math.sqrt(this.string));
+                   if (this.equalClicked == true) {
+                       this.clear();
+                    }
+                    this.string = temp;
+                    this.readyToClear = true;
                 }
                 this.isNegativeString();
             },
@@ -205,8 +206,12 @@ window.addEventListener('load', () => {
                 }
                 this.isNegativeString();
                 */
-               this.string = this.renderNumber(Math.pow(this.string, 2));
-               this.memory = parseFloat(this.string);
+               let temp = this.renderNumber(Math.pow(this.string, 2));
+                if (this.equalClicked == true) {
+                    this.clear();
+                }
+                this.string = temp;
+                this.readyToClear = true;
             },
             equal: function (event) {
                 if (this.operation == '+') {
@@ -230,11 +235,11 @@ window.addEventListener('load', () => {
                     this.string = this.renderNumber(this.memory);
                     this.readyToClear = true;
                     */
-                   this.buildHistoryString(" + ");
-                   this.memory += parseFloat(this.string);
-                   this.buildHistoryString(this.string + " = " + this.memory);
-                   this.string = this.renderNumber(this.memory);
-                   this.readyToClear = true;
+                    this.buildHistoryString(" + ");
+                    this.memory += parseFloat(this.string);
+                    this.buildHistoryString(this.string + " = " + this.memory);
+                    this.string = this.renderNumber(this.memory);
+                    this.readyToClear = true;
                 }
                 if (this.operation == '-') {
                     this.buildHistoryString(" - ");
@@ -314,20 +319,20 @@ window.addEventListener('load', () => {
                 }
                 this.isNegativeString();
             },
-            buildHistoryString : function(string) {
+            buildHistoryString: function (string) {
                 this.historyString += string;
                 console.log(this.historyString);
             },
-            pushHistoryList : function() {
-                if(this.historyString !== "") {
+            pushHistoryList: function () {
+                if (this.historyString !== "") {
                     this.historyList.push(this.historyString);
                 }
             },
-            clearHistory : function(string) {
+            clearHistory: function (string) {
                 this.historyList = [];
             },
-            isNegativeString : function() {
-                if(parseFloat(this.string) < 0 || this.memory < 0) {
+            isNegativeString: function () {
+                if (parseFloat(this.string) < 0 || this.memory < 0) {
                     this.showSqrtButton = false;
                 }
                 else {
