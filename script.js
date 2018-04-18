@@ -51,13 +51,16 @@ window.addEventListener('load', () => {
                 this.isNegativeString();
             },
             backspace: function (event) {
-                if (this.string.length == 1) {
-                    this.string = "0";
+                console.log(this.readyToClear);
+                if(this.readyToClear == false) {
+                    if (this.string.length == 1) {
+                        this.string = "0";
+                    }
+                    else {
+                        this.string = this.string.slice(0, this.string.length - 1);
+                    }
+                    this.isNegativeString();
                 }
-                else {
-                    this.string = this.string.slice(0, this.string.length - 1);
-                }
-                this.isNegativeString();
             },
             renderNumber: function (theNumber) {
                 let nrOfDigits = 10;
@@ -215,7 +218,6 @@ window.addEventListener('load', () => {
             },
             equal: function (event) {
                 if (this.operation == '+') {
-
                     /*
                     this.buildHistoryString(" + ");
                     this.memory += parseFloat(this.string);
@@ -292,7 +294,6 @@ window.addEventListener('load', () => {
                         this.buildHistoryString(" + " + this.string);
                         this.memory += parseFloat(this.string);
                         this.string = this.renderNumber(this.memory);
-                        console.log(this.string);
                     }
                     if (this.operation == '-') {
                         this.buildHistoryString(" - " + this.string);
@@ -321,7 +322,6 @@ window.addEventListener('load', () => {
             },
             buildHistoryString: function (string) {
                 this.historyString += string;
-                console.log(this.historyString);
             },
             pushHistoryList: function () {
                 if (this.historyString !== "") {
